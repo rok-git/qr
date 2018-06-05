@@ -5,6 +5,48 @@
 
 #define DEF_SCALE	16.0
 
+// switch hack
+#define CASE(str) if ([__s__ isEqualToString:(str)])
+#define SWITCH(s) for (NSString *__s__ = (s); __s__; __s__ = nil)
+#define DEFAULT
+
+NSBitmapImageFileType fileTypeFromFilename(const NSString *filename)
+{
+    NSBitmapImageFileType ret;
+    if(!filename){
+	ret = NSBitmapImageFileTypePNG;
+    }else{
+	NSString *extension = [[filename pathExtension] lowercaseString];
+	if(extension){
+	    SWITCH(extension){
+		CASE(@"png"){
+		    ret = NSBitmapImageFileTypePNG;
+		    break;
+		}
+		CASE(@"gif"){
+		    ret = NSBitmapImageFileTypeGIF;
+		    break;
+		}
+		CASE(@"bmp"){
+		    ret = NSBitmapImageFileTypeBMP;
+		    break;
+		}
+		CASE(@"jpeg"){
+		    ret = NSBitmapImageFileTypeJPEG;
+		    break;
+		}
+		DEFAULT{
+		    ret = NSBitmapImageFileTypePNG;
+		    break;
+		}
+	    }
+	}else{
+	    ret = NSBitmapImageFileTypePNG;
+	}
+    }
+    return ret;
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -59,7 +101,8 @@ int main(int argc, char *argv[])
 	NSBitmapImageRep *bitmapRep = 
 	        [[NSBitmapImageRep alloc] initWithCIImage: scaledImage];
 	NSDictionary *prop = [[NSDictionary alloc] init];
-	NSData *data = [bitmapRep representationUsingType: NSPNGFileType 
+	NSBitmapImageFileType filetype = fileTypeFromFilename(outputFileName);
+	NSData *data = [bitmapRep representationUsingType: filetype 
 	    properties: prop];
 	[prop autorelease];
 
