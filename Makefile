@@ -1,4 +1,4 @@
-CC	= cc -framework Cocoa -framework CoreImage
+CC	= cc -framework Cocoa -framework CoreImage -fobjc-arc
 
-all:	qr
+all:	qr qrr
 
