@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 	NSBitmapImageFileType filetype = fileTypeFromFilename(outputFileName);
 	NSData *data = [bitmapRep representationUsingType: filetype 
 	    properties: prop];
-	[prop autorelease];
+//	[prop autorelease];
 
 	if(outputFileName == nil){
 	    outputFileHandle = [NSFileHandle fileHandleWithStandardOutput];
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 	}
 	[outputFileHandle writeData: data];
 	
-	[bitmapRep autorelease];
+//	[bitmapRep autorelease];
     }
     return 0;
 }
