@@ -35,6 +35,10 @@ NSBitmapImageFileType fileTypeFromFilename(const NSString *filename)
 		    ret = NSBitmapImageFileTypeJPEG;
 		    break;
 		}
+		CASE(@"jpg"){
+		    ret = NSBitmapImageFileTypeJPEG;
+		    break;
+		}
 		DEFAULT{
 		    ret = NSBitmapImageFileTypePNG;
 		    break;
