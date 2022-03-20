@@ -43,7 +43,11 @@ int main(int argc, char *argv[])
 	    for(CIQRCodeFeature *qrFeature in features){
 		// Japanese text in QR must be in Shift_JIS
 		message = [qrFeature.messageString dataUsingEncoding: NSShiftJISStringEncoding];
-		[outputFileHandle writeData: message];
+                NSError *err;
+		if(![outputFileHandle writeData: message error: &err]){
+                    NSLog(@"Error: %@", err);
+                    return 1;
+                }
 	    }
 	}
 

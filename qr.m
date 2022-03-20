@@ -119,7 +119,11 @@ int main(int argc, char *argv[])
 	    else
 		return 1;
 	}
-	[outputFileHandle writeData: data];
+        NSError *err;
+	if(![outputFileHandle writeData: data error: &err]){
+            NSLog(@"Error: %@", err);
+            return 1;
+        }
 	
 //	[bitmapRep autorelease];
     }
